@@ -32,7 +32,7 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div class="container">
-                    <a class="navbar-brand" href="#"
+                    <a class="navbar-brand" href="../index.html"
                         ><img
                             src="./images/logo.svg"
                             alt=""
@@ -98,8 +98,12 @@
                                             Editar perfil
                                         </button>
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Otra acción</a></li>
+                                    <li><a class="dropdown-item" href="./adminProyectos.html">Admin Proyectos</a></li>
+                                    <li><a class="dropdown-item" href="./adminUsuarios.html">Admin Usuarios</a></li>
+                                    <li><a class="dropdown-item" href="./nuevoProyecto.html">Nuevo Proyecto</a></li>
+                                    <li><a class="dropdown-item" href="./proyectos.html">Proyectos</a></li>
                                     <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" href="./editarPerfil.html">Editar Perfil</a></li>
                                     <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
                                 </ul>
                             </li>
@@ -182,8 +186,10 @@
                                             
                                             <!-- Contraseña -->
                                             <label for="pass" class="form-label mt-3">Contraseña:</label>
-                                            <input required id="pass" type="password" class="form-control" />
-                                        </div>
+                                            <input required minlength="6" id="pass" type="password" class="form-control" />
+                                            <div class="invalid-feedback">
+                                              La contraseña debe tener como mínimo 6 caracteres
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -243,7 +249,21 @@
             integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
             crossorigin="anonymous"
         ></script>
-        
+        <script>
+            //Capturamos el formulario en una variable
+            const formulario = document.querySelector("form")
+            //Detectamos su evento submit (enviar)
+            formulario.addEventListener("submit", (event) => {
+            //Comprobamos si el formulario no valida 
+            if (!formulario.checkValidity()) {
+                //Detenemos el evento enviar (submit)
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            //Y añadimos la clase 'was-validate' para que se muestren los mensajes
+            formulario.classList.add('was-validated')
+            });
+      </script>
     </body>
 </html>
 

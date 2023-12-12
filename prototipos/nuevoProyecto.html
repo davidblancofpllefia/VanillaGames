@@ -66,10 +66,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="#">TOP5 Proyectos</a>
+                                <a class="nav-link" aria-current="page" href="./proyectos.html">TOP5 Proyectos</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="#">A cerca de</a>
@@ -94,9 +94,12 @@
                                         <p>user@email.com</p>
                                     </li>
                                     <li><hr class="dropdown-divider" /></li>
-                                    <li><a class="dropdown-item" href="#">Acciónn</a></li>
-                                    <li><a class="dropdown-item" href="#">Otra acción</a></li>
+                                    <li><a class="dropdown-item" href="./adminProyectos.html">Admin Proyectos</a></li>
+                                    <li><a class="dropdown-item" href="./adminUsuarios.html">Admin Usuarios</a></li>
+                                    <li><a class="dropdown-item" href="./nuevoProyecto.html">Nuevo Proyecto</a></li>
+                                    <li><a class="dropdown-item" href="./proyectos.html">Proyectos</a></li>
                                     <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" href="./editarPerfil.html">Editar Perfil</a></li>
                                     <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
                                 </ul>
                             </li>
@@ -121,8 +124,11 @@
                     </div>
                     <div class="col-12 col-md-8">
                         <form action="" class="form">
-                            <label class="form-label" for="nombre"><strong>Nombre: </strong></label>
-                            <input id="nombre" type="text" value="Nombre Autor" class="form-control" />
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input required id="nombre" type="text" class="form-control" value="nombre autor" />
+                            <div class="invalid-feedback">
+                            Este campo no puede estar vacio
+                            </div>
 
                             <label class="form-label mt-2" for="descripcion"
                                 ><strong>Descripción: </strong></label
@@ -173,5 +179,20 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"
         ></script>
+        <script>
+            //Capturamos el formulario en una variable
+            const formulario = document.querySelector("form")
+            //Detectamos su evento submit (enviar)
+            formulario.addEventListener("submit", (event) => {
+            //Comprobamos si el formulario no valida 
+            if (!formulario.checkValidity()) {
+                //Detenemos el evento enviar (submit)
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            //Y añadimos la clase 'was-validate' para que se muestren los mensajes
+            formulario.classList.add('was-validated')
+            });
+      </script>
     </body>
 </html>
