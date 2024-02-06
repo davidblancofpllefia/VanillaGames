@@ -1,6 +1,7 @@
 export default {
-    template: // html
-    `    <div class="container">
+  template: // html 
+  `
+  <div class="container">
     <h1 class="mt-5 text-center">Inicia sesión</h1>
     <div class="m-5 mx-auto" style="max-width: 400px">
         <!-- 623451 -->
@@ -37,11 +38,8 @@ export default {
           <a class="d-block text-end" href="#">¿Has olvidado tu contraseña?</a>
         
           <!-- Botón Iniciar sesión -->
-          <input
-            type="submit"
-            class="btn btn-primary w-100 mt-3"
-            value="Iniciar sesión"
-          />
+          <a class="btn btn-primary w-100 mt-3" href="#"
+          >Iniciar sesión
         </form>
         
         <a class="d-block mt-5 btn btn-secondary mx-auto" href="#"
@@ -50,22 +48,22 @@ export default {
     </div>
 </div>
     `,
-    script: () => {
-      console.log('vista registro cargada')
-      // Validación bootstrap
-  
-      // Capturamos el formulario en una variable
-      const formulario = document.querySelector('#formRegistro')
-      // Detectamos su evento submit (enviar)
-      formulario.addEventListener('submit', (event) => {
-        // Detenemos el evento enviar (submit)
-          event.preventDefault()
-          event.stopPropagation()
+  script: () => {
+    console.log("vista registro cargada");
+    // Validación bootstrap
+
+    // Capturamos el formulario en una variable
+    const formulario = document.querySelector("#formRegistro");
+    // Detectamos su evento submit (enviar)
+    formulario.addEventListener("submit", (event) => {
+      // Detenemos el evento enviar (submit)
+      event.preventDefault();
+      event.stopPropagation();
       // Comprobamos si el formulario no valida
-        if (!formulario.checkValidity()) {
-          // Y añadimos la clase 'was-validate' para que se muestren los mensajes
-          formulario.classList.add('was-validated')
-        }
-      })
-    }
-  }
+      if (!formulario.checkValidity()) {
+        // Y añadimos la clase 'was-validate' para que se muestren los mensajes
+        formulario.classList.add("was-validated");
+      }
+    });
+  },
+};
