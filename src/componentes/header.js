@@ -1,5 +1,5 @@
 // importamos la función ls del archivo funciones
-import { ls } from './menus'
+import { ls } from '../componentes/funciones'
 import { menuRol, menuUsuario } from './menus'
 import { editarPerfil } from './editarPerfil'
 
@@ -111,8 +111,4 @@ export const header = {
     })
   }
 }
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> 19e51a96f3c4f29c98d695c7938c91c17a0785cd
