@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+import adminProyectos from '../vistas/adminProyectos.js'
+
+
+>>>>>>> 19e51a96f3c4f29c98d695c7938c91c17a0785cd
   
 export const enrutador = {
 
@@ -6,6 +12,10 @@ export const enrutador = {
       home: import('../vistas/homeVista.js'),
       // Usuarios
       admin: import('../vistas/adminVista.js'),
+<<<<<<< HEAD
+=======
+      adminProyectos: import('../vistas/adminProyectos.js'),
+>>>>>>> 19e51a96f3c4f29c98d695c7938c91c17a0785cd
       registro: import('../vistas/registroVista.js'),
       login: import('../vistas/loginVista.js'),
       // Proyectos
