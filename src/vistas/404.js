@@ -1,11 +1,10 @@
 export default {
     template: // html
-    `
-    <p>ERROR 404</p>
-    `,
-
-    script: () => {
-        console.log("Error 404")
-    }
-}
-
+      `
+      <div class="container p-5">
+        <h1 class="mt-5 text-center fw-bold" style="font-size: 100px">
+          ERROR 404
+        </h1>
+      </div>
+      `
+  }

@@ -1,58 +1,61 @@
 // importamos la función ls del archivo funciones
-import { ls } from './menus'
+import { User } from '../bd/user'
+import { ls } from '../componentes/funciones'
+import { editarPerfil } from './editPerfil'
 import { menuRol, menuUsuario } from './menus'
-import { editarPerfil } from './editarPerfil'
 
 export const header = {
   template: // html
   `
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand router-link" href="#/home"
-      ><img
-        src="images/logo.svg"
-        alt=""
-        width="30"
-        height="24"
-        class="d-inline-block align-text-top"
-      />
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand " href="#/home"
+        ><img
+          src="images/logo.svg"
+          alt=""
+          width="30"
+          height="24"
+          class="d-inline-block align-text-top"
+        />
 
-      Vanilla Games</a
-    >
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active router-link" aria-current="page" href="#/home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link router-link" aria-current="page" href="#">TOP5 Proyectos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link router-link" aria-current="page" href="#" class="router-link">A cerca de</a>
-        </li>
-      </ul>
+        Vanilla Games</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active router-link" aria-current="page" href="#/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link router-link" aria-current="page" href="#">TOP5 Proyectos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link router-link" aria-current="page" href="#" class="router-link">A cerca de</a>
+          </li>
+        </ul>
 
-      <div id="menuRol"></div>
-      <div id="menuUsuario"></div>
+        <div id="menuRol"></div>
+        <div id="menuUsuario"></div>
+      </div>
     </div>
-  </div>
-</nav>
-<div id="modal"></div>
-
+  </nav>
+  <div id="modal"></div>
   `,
   script: () => {
     console.log('Header cargado')
+    // Simulamos el inicio de sesión de un usuario
+    // ls.setUsuario({ email: 'chafardera@gmial.com', rol: 'registrado' })
+
     // Cargamos la ventana modal para editar perfil
     document.querySelector('#modal').innerHTML = editarPerfil.template
     // Y ejecutamos su lógica
@@ -102,6 +105,9 @@ export const header = {
     document.querySelector('header').addEventListener('click', (e) => {
       if (e.target.classList.contains('cerrarSesion')) {
         e.preventDefault()
+
+        // Cerramos sesión en la bd
+        User.logout()
         // Borramos el localstorage
         ls.setUsuario('')
         // Cargamos la pagina home

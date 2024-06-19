@@ -1,5 +1,4 @@
-// Importamos la conexión a la base de datos desde './supabase.js'
-import { supabase } from './supabase.js'
+
 
 // Definición de la clase User
 export class User {

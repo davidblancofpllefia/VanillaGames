@@ -1,152 +1,181 @@
+import { proyectos } from "../bd/datos.pruebas"
+
 export default {
-    template: // html
-    `
+  template: // html
+  `
+  <div class="container">
+  <h1 class="mt-5">Edición de proyecto</h1>
+  <div class="d-flex justify-content-end">
+    <bottom id="botonVolver" class="btn btn-outline-secondary mt-5 bi bi-arrow-bar-left router-link">
+      Volver</bottom
+    >
+  </div>
+  <form novalidate id="formularioEditarProyecto" action="" class="form">
+    <div class="row mt-2">
+      <div class="col-12 col-md-4 pt-2 mb-3">
+        <img id="imagenJuego" src="images/juego.jpg" alt="" class="img-fluid" />
+        <label class="form-label mt-2" for="urlImagen"
+          ><strong>URL imagen: </strong></label
+        >
+        <input
+          id="urlImagen"
+          type="text"
+          class="form-control"
+          value="http://enlaceImagen.com"
+        />
+        <div class="invalid-feedback">
+          No es una url correcta
+        </div>
+      </div>
+      <div class="col-12 col-md-8">
+        <!-- Formulario nuevo proyecto -->
 
+        <!-- Nombre proyecto -->
+        <label class="form-label" for="nombre"><strong>Nombre: </strong></label>
+        <input
+          required
+          id="nombreJuego"
+          type="text"
+          value="Nombre Autor"
+          class="form-control"
+        />
+        <div class="invalid-feedback">
+          Debe tener un nombre de proyecto
+        </div>
 
-            <!-- VEntana edición perfil -->
+        <!-- Descripción -->
+        <label class="form-label mt-2" for="descripcion"
+          ><strong>Descripción: </strong></label
+        >
+        <textarea id="descripcion" class="form-control" rows="4">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, sunt? Recusandae labore at voluptatem tempore incidunt distinctio eaque? Est aspernatur laudantium itaque ullam numquam autem dolor quia amet eum consectetur.</textarea
+        >
 
-            <!-- Modal -->
-            <div
-                class="modal fade"
-                id="exampleModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-            >
-            <!-- Formulario de edición de perfil -->
-                <form action="">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                    Edición de perfil
-                                </h1>
-                                <button
-                                    type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form border shadow-sm p-3">
-                                    <div class="m-1" style="max-width: 400px">
-                                        <div class="imgPerfil border shadow-sm p-3 mb-3">
-                                            <div
-                                                class="imagen mx-auto mb-1 rounded-circle"
-                                                style="
-                                                    background-image: url(.images/avatar.svg);
-                                                    width: 200px;
-                                                    height: 200px;
-                                                    background-size: cover;
-                                                    background-position: center;
-                                                "
-                                            ></div>
-                                            
-                                            <!-- Imagen de perfil -->
-                                            <label for="imagen" class="form-label mt-3">URL imagen:</label>
-                                            <input
-                                                id="imagen"
-                                                type="url"
-                                                class="form-control"
-                                                value="http://imagenavatar.png"
-                                            />
-                                        </div>
+        <!-- Estado -->
+        <label class="form-label mt-2" for="estado"
+          ><strong>Estado: </strong></label
+        >
+        <select required id="estado" class="form-control">
+          <option value="Cerrado">Cerrado</option>  
+          <option value="En desarrollo">En desarrollo</option>
+        </select>
+        <div class="invalid-feedback">
+          Debes definir un estado
+        </div>
 
-                                        <div class="">
-                                            
-                                            <!-- Nombre -->
-                                            <label for="nombre" class="form-label">Nombre:</label>
-                                            <input required id="nombre" type="text" class="form-control" />
-                                            
-                                            <!-- Apellidos -->
-                                            <label for="apellidos" class="form-label">Apellidos:</label>
-                                            <input id="apellidos" type="text" class="form-control" />
-                                            
-                                            <!-- Email -->
-                                            <label for="email" class="form-label">Email:</label>
-                                            <input required id="email" type="email" class="form-control" />
-                                            
-                                            <!-- Contraseña -->
-                                            <label for="pass" class="form-label mt-3">Contraseña:</label>
-                                            <input required id="pass" type="password" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                    Cancelar
-                                </button>
-                                <button type="button" class="btn btn-primary">Guardar cambios</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+        <!-- Fecha -->
+        <label class="form-label mt-2" for="fecha"
+          ><strong>Fecha: </strong></label
+        >
+        <input id="fecha" type="date" class="form-control"  />
+        <div class="invalid-feedback">
+          El formato no es correcto
+        </div>
 
-            </div>
-        </header>
-        <main>
-            <div class="container">
-                <h1 class="mt-5">Modal para editar perfil en header</h1>
-                <!-- Button trigger modal -->
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                >
-                    Launch demo modal
-                </button>
-            </div>
-        </main>
-        <footer class="">
-            <nav class="navbar bg-secondary fixed-bottom small">
-                <div class="container">
-                    <a class="navbar-brand" href="http://www.fpllefia.com">
-                        <img
-                            src=".images/logo.svg"
-                            alt="fpllefia"
-                            width="30"
-                            height="24"
-                            class="d-inline-block align-text-top"
-                        />
-                        FPLlefià
-                    </a>
-                    <span class="navbar-text">@Texto de header</span>
-                    <a href="#" class="nav-link">Vínculo header</a>
-                </div>
-            </nav>
-        </footer>
+        <!-- Enlace al proyecto -->
+        <label class="form-label mt-2" for="enlace"
+          ><strong>Enlace: </strong></label
+        >
+        <input
+          id="enlace"
+          type="url"
+          class="form-control"
+          value="http://enlace.com"
+        />
+        <div class="invalid-feedback">
+          No es una url correcta
+        </div>
 
-        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <!-- Repositorio -->
+        <label class="form-label mt-2" for="repositorio"
+          ><strong>Repositorio: </strong></label
+        >
+        <input
+          id="repositorio"
+          type="text"
+          class="form-control"
+          value="user.github.com/123456"
+        />
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-            crossorigin="anonymous"
-        ></script>
-    </body>
-</html>
+        <!-- Submit -->
+        <input
+          id="subirProyecto"
+          type="submit"
+          class="btn btn-success mt-3"
+          value="Actualizar proyecto"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+  `,
+  script: (id) => {
+    // Simulamos la consulta a un proyecto por id
+    // eslint-disable-next-line eqeqeq
+    const proyectoArray = proyectos.filter(p => p.id == id)
+    const proyecto = proyectoArray[0]
 
+    // Transformamos la fecha en un formato yy-mm-dd
+    const fecha = proyecto.created_at
+    const fechaCorta = fecha.split('T')[0]
 
-    `,
-    script: () => {
-        console.log('vista registro cargada')
-        // Validación bootstrap
-    
-        // Capturamos el formulario en una variable
-        const formulario = document.querySelector('#formRegistro')
-        // Detectamos su evento submit (enviar)
-        formulario.addEventListener('submit', (event) => {
-          // Detenemos el evento enviar (submit)
-            event.preventDefault()
-            event.stopPropagation()
-        // Comprobamos si el formulario no valida
-          if (!formulario.checkValidity()) {
-            // Y añadimos la clase 'was-validate' para que se muestren los mensajes
-            formulario.classList.add('was-validated')
-          }
-        })
+    // Insertamos los datos en el formulario
+    document.querySelector('#imagenJuego').setAttribute('src', proyecto.imagen)
+    document.querySelector('#urlImagen').value = proyecto.imagen
+    document.querySelector('#nombreJuego').value = proyecto.nombre
+    document.querySelector('#descripcion').value = proyecto.descripcion
+    document.querySelector('#estado').value = proyecto.estado
+    document.querySelector('#fecha').value = fechaCorta
+    console.log(fechaCorta)
+    document.querySelector('#enlace').value = proyecto.enlace
+    document.querySelector('#repositorio').value = proyecto.repositorio
+
+    // Boton volver atras
+    document.querySelector('#botonVolver').addEventListener('click', () => {
+      window.history.back()
+    })
+
+    // Actualización de la imagen a partir de la urlImagen
+    // Capturamos input
+    const inputUrl = document.querySelector('#urlImagen')
+    // Detectamos cambios en su value
+    inputUrl.addEventListener('input', () => {
+      const imagen = document.querySelector('#imagenJuego')
+      // Actualizamos el atributo src y por lo tanto la imagen
+      imagen.setAttribute('src', inputUrl.value)
+    })
+
+    // Validación BOOTSTRAP
+    // Capturamos el formulario en una variable
+    const formulario = document.querySelector('#formularioEditarProyecto')
+    // Detectamos su evento submit (enviar)
+    formulario.addEventListener('submit', (event) => {
+      // Detenemos el evento enviar (submit)
+      event.preventDefault()
+      event.stopPropagation()
+      // Comprobamos si el formulario no valida
+      if (!formulario.checkValidity()) {
+        // Y añadimos la clase 'was-validate' para que se muestren los mensajes
+        formulario.classList.add('was-validated')
+      } else {
+        //* ** ENVIAMOS DATOS A LA BASE DE DATOS */
+        enviaDatos()
       }
+    })
+
+    // Función para enviar datos a la base de datos
+    function enviaDatos () {
+      const proyectoEditado = {
+        imagen: document.querySelector('#urlImagen').value,
+        nombre: document.querySelector('#nombreJuego').value,
+        descripcion: document.querySelector('#descripcion').value,
+        estado: document.querySelector('#estado').value,
+        enlace: document.querySelector('#enlace').value,
+        repositorio: document.querySelector('#repositorio').value
+      }
+      // eslint-disable-next-line no-undef
+      alert(`Enviando a la base de datos el objeto con id = ${proyecto.id}`)
+      console.log(`Enviando a la base de datos el objeto con id = ${proyecto.id}`, proyectoEditado)
     }
+  }
+}
