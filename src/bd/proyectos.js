@@ -1,68 +1,107 @@
-export const proyectos = [
-    {
-      id: 1,
-      created_at: '2023-08-29T10:00:00Z',
-      user_id: '36f66b5e-aa59-4f96-b6a8-3c890d6a452c',
-      nombre: 'Salto Espacial',
-      descripcion: 'Juego de plataforma espacial con saltos emocionantes',
-      imagen: 'imagen1.jpg',
-      enlace: 'https://salto-espacial.com',
-      repositorio: 'https://github.com/usuario/salto-espacial',
-      estado: 'En desarrollo',
-      nombre_usuario: 'Carmen',
-      apellidos_usuario: 'Maura'
-    },
-    {
-      id: 2,
-      created_at: '2023-08-28T15:30:00Z',
-      user_id: 'a3df05b0-91e7-4f68-a067-841fcf5de9f0',
-      nombre: 'Carrera Loca',
-      descripcion: 'Juego de carreras con obstáculos y power-ups',
-      imagen: 'imagen2.jpg',
-      enlace: 'https://carrera-loca.com',
-      repositorio: 'https://github.com/usuario/carrera-loca',
-      estado: 'En desarrollo',
-      nombre_usuario: 'Antonio',
-      apellidos_usuario: 'Resines'
-    },
-    {
-      id: 3,
-      created_at: '2023-08-27T09:45:00Z',
-      user_id: 'd67e3b1c-875f-437f-bd2a-9ff50b72083d',
-      nombre: 'Aventuras en la Selva',
-      descripcion: 'Explora la selva en busca de tesoros y desafíos',
-      imagen: 'imagen3.jpg',
-      enlace: 'https://aventuras-en-la-selva.com',
-      repositorio: 'https://github.com/usuario/aventuras-en-la-selva',
-      estado: 'En desarrollo',
-      nombre_usuario: 'Maribel',
-      apellidos_usuario: 'Verdú'
-    },
-    {
-      id: 4,
-      created_at: '2023-08-26T11:20:00Z',
-      user_id: '36f66b5e-aa59-4f96-b6a8-3c890d6a452c',
-      nombre: 'Rompecabezas Divertido',
-      descripcion: 'Resuelve rompecabezas desafiantes con imágenes divertidas',
-      imagen: 'imagen4.jpg',
-      enlace: 'https://rompecabezas-divertido.com',
-      repositorio: 'https://github.com/usuario/rompecabezas-divertido',
-      estado: 'En desarrollo',
-      nombre_usuario: 'CArmen',
-      apellidos_usuario: 'Maura'
-    },
-    {
-      id: 5,
-      created_at: '2023-08-25T14:15:00Z',
-      user_id: 'a3df05b0-91e7-4f68-a067-841fcf5de9f0',
-      nombre: 'Defensor Espacial',
-      descripcion: 'Protege la galaxia de invasores alienígenas en este juego arcade',
-      imagen: 'imagen5.jpg',
-      enlace: 'https://defensor-espacial.com',
-      repositorio: 'https://github.com/usuario/defensor-espacial',
-      estado: 'En desarrollo',
-      nombre_usuario: 'Antonio',
-      apellidos_usuario: 'Resines'
+import { supabase } from './supabase'
+
+
+export class Proyecto {
+  constructor ({
+    id = null, // ID único del Proyecto
+    created_at = null, // Fecha de creación del Proyecto
+    user_id = null, // ID del usuario asociado al Proyecto
+    nombre = null, // Nombre del usuario
+    apellidos = null, // Apellidos del usuario
+    avatar = 'default_avatar.png', // URL del avatar por defecto
+    estado = 'activo', // Estado del Proyecto (activo/inactivo, por ejemplo)
+    rol = 'registrado' // Rol del usuario (registrado, administrador, etc.)
+  }) {
+    this.id = id
+    this.created_at = created_at
+    this.user_id = user_id
+    this.nombre = nombre
+    this.apellidos = apellidos
+    this.avatar = avatar
+    this.estado = estado
+    this.rol = rol
+  }
+
+  static async getAll () {
+    const { data: proyectos, error } = await supabase
+      .from('proyectos')
+      .select('*') // Selecciona todas las columnas
+      .order('created_at', { ascending: false }) // Ordena por fecha de creación descendente
+
+    // Manejo de errores: lanza una excepción si ocurre algún error
+    if (error) {
+      throw new Error(error.message)
     }
-  ]
-  
+
+    // Mapea los proyectos obtenidos a instancias de la clase Proyecto y los devuelve
+    return proyectos.map((proyecto) => new Proyecto(proyecto))
+  }
+
+  // Método estático para obtener un proyecto por su ID
+  static async getById (id) {
+    // Realiza una consulta para obtener un proyecto por su ID
+    const { data: proyecto, error } = await supabase
+      .from('proyectos')
+      .select('*')
+      .eq('id', id) // Filtra por el ID especificado
+
+    // Manejo de errores
+    if (error) {
+      throw new Error(error.message)
+    }
+
+    // Devuelve una instancia de Proyecto con la información obtenida
+    return new Proyecto(proyecto[0])
+  }
+
+  // Método estático para obtener un proyecto por el ID del usuario asociado
+  static async getByUserId (userId) {
+    // Realiza una consulta para obtener un proyecto por el ID de usuario asociado
+    const { data: proyecto, error } = await supabase
+      .from('proyectos')
+      .select('*')
+      .eq('user_id', userId) // Filtra por el ID de usuario especificado
+
+    // Manejo de errores
+    if (error) {
+      throw new Error(error.message)
+    }
+
+    // Devuelve una instancia de Proyecto con la información obtenida
+    return new Proyecto(proyecto[0])
+  }
+
+  // Método estático para crear un nuevo proyecto
+  static async create (proyectoData) {
+    // Inserta un nuevo proyecto en la base de datos con los datos proporcionados
+    const { data, error } = await supabase
+      .from('proyectos')
+      .insert(proyectoData) // Inserta los datos del nuevo proyecto
+      .select() // Devuelve los datos insertados
+
+    // Manejo de errores
+    if (error) {
+      throw new Error(`Error creando proyecto: ${error.message}`)
+    }
+
+    // Si se insertaron datos, devuelve una nueva instancia de Proyecto con los datos insertados
+    return data ? new Proyecto(data[0]) : null
+  }
+
+  // Método estático para actualizar un proyecto existente por su ID
+  static async update (id, newData) {
+    // Actualiza un proyecto existente en la base de datos con los nuevos datos
+    const { error } = await supabase
+      .from('proyectos')
+      .update(newData) // Actualiza con los nuevos datos proporcionados
+      .eq('id', id) // Filtra por el ID del proyecto a actualizar
+
+    // Manejo de errores
+    if (error) {
+      throw new Error(`Error actualizando proyecto: ${error.message}`)
+    }
+
+    // Si la actualización fue exitosa, devuelve true
+    return true
+  }
+}

@@ -92,6 +92,38 @@ export const editarPerfil = {
   </div>
   `,
   script: () => {
-    console.log('script de modal editar perfil cargado')
+    console.log('script editar perfil cargado')
+    // Validación bootstrap
+    // Capturamos el formulario en una variable
+    const formulario = document.querySelector('#formularioEditarPerfil')
+    // Detectamos su evento submit (enviar)
+    formulario.addEventListener('submit', (event) => {
+    // Comprobamos si el formulario no valida
+    // Detenemos el evento enviar (submit)
+      event.preventDefault()
+      event.stopPropagation()
+      if (!formulario.checkValidity()) {
+        // formulario no valida
+      } else {
+        //* ** ENVIAMOS DATOS A LA BASE DE DATOS */
+        enviaDatos()
+      }
+      // Y añadimos la clase 'was-validate' para que se muestren los mensajes
+      formulario.classList.add('was-validated')
+    })
+
+    // Función para enviar datos a la base de datos
+    function enviaDatos () {
+      const perfilEditado = {
+        avatar: document.querySelector('#avatar').value,
+        nombre: document.querySelector('#nombrePerfil').value,
+        apellidos: document.querySelector('#apellidosPerfil').value,
+        email: document.querySelector('#emailPerfil').value,
+        contraseña: document.querySelector('#passPerfil').value
+
+      }
+      alert(`Enviando a la base de datos el objeto con id = ${ls.getUsuario().user_id}`)
+      console.log(`Enviando a la base de datos el objeto con user_id = ${ls.getUsuario().user_id}`, perfilEditado)
+    }
   }
-}
+} 
