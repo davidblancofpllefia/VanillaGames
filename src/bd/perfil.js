@@ -1,4 +1,4 @@
-import { supabase } from './supabase'
+import { perfiles } from "./datos.pruebas"
 
 /* eslint-disable camelcase */
 export class Perfil {
