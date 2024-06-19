@@ -1,5 +1,5 @@
 // importamos la función ls del archivo funciones
-import { ls } from '../componentes/funciones'
+import { ls } from './menus'
 import { menuRol, menuUsuario } from './menus'
 import { editarPerfil } from './editarPerfil'
 
