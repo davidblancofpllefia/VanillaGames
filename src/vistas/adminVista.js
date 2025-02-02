@@ -17,7 +17,7 @@ export default {
             class="selectorFicha fichaProyectos nav-link w-100"
           >
             Proyectos
-          </button>
+          </button>x
         </li>
         <!--Etiqueta Mis proyectos-->
         <li id="pestanyaUsuarios" class="nav-item w-50">
