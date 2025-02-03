@@ -1,8 +1,8 @@
 import path from 'path';
 
 export default {
-  root: '.', // La raíz es el directorio actual (donde está index.html)
-  base: './',
+  root: '.',
+  base: '/vanillagames/', // Nombre exacto del repositorio
   resolve: {
     alias: {
       '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
@@ -13,7 +13,7 @@ export default {
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index.html'), // Entrada correcta
+        main: path.resolve(__dirname, 'index.html'),
       },
       output: {
         dir: path.resolve(__dirname, 'dist'),
@@ -28,3 +28,4 @@ export default {
     hot: true
   }
 };
+
