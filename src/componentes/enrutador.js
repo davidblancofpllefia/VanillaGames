@@ -1,18 +1,19 @@
+  
 export const enrutador = {
 
   // Objeto (diccionario) con todas las rutas y su vista asociada
   rutas: {
-    home: import('../vistas/homeVista'),
+    home: import('../vistas/homeVista.js'),
     // Usuarios
-    admin: import('../vistas/adminVista'),
-    registro: import('../vistas/registroVista'),
-    login: import('../vistas/loginVista'),
+    admin: import('../vistas/adminVista.js'),
+    registro: import('../vistas/registroVista.js'),
+    login: import('../vistas/loginVista.js'),
     // Proyectos
-    proyectos: import('../vistas/proyectosVista'),
-    proyectoNuevo: import('../vistas/proyectoNuevoVista'),
-    proyectoEditar: import('../vistas/proyectoEditarVista'),
-    proyectoDetalle: import('../vistas/proyectoDetalleVista'),
-    404: import('../vistas/404')
+    proyectos: import('../vistas/proyectosVista.js'),
+    proyectoNuevo: import('../vistas/proyectoNuevoVista.js'),
+    proyectoEditar: import('../vistas/proyectoEditarVista.js'),
+    proyectoDetalle: import('../vistas/proyectoDetalleVista.js'),
+    404: import('../vistas/404.js')
   },
 
   // Método que obtiene la ruta del navegador
@@ -35,7 +36,7 @@ export const enrutador = {
       document.querySelector('main').innerHTML = vista.template
       // A los script les pasamos el parametro que hemos extraido de la ruta. Así podemos pasar, por ejemplo, el id de un proyecto
       vista.script(parametro)
-    } else {
+    }  else {
       window.location = '#/404'
     }
   },
